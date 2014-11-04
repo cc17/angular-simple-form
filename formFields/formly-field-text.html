@@ -1,0 +1,21 @@
+<div class="form-group">
+  <label for="{{id}}" class="{{options.labelWidth || 'col-sm-2'}} control-label">
+    <span class="text-danger">{{options.required ? '*' : ''}}</span>
+    <span ng-bind-html="options.label || 'Text'"></span>
+  </label>
+  <div class="{{options.formItemWidth || 'col-sm-4'}}">
+    <input type="text"
+           class="form-control"
+           id="{{id}}"
+           formly-dynamic-name="options.key"
+           placeholder="{{options.placeholder}}"
+           ng-required="options.required"
+           ng-disabled="options.disabled"
+           ng-model="result[options.key || index]">
+    <p id="{{id}}_description" class="help-block" ng-if="options.description">{{options.description}}</p>
+
+    <div class="help-block" ng-repeat="valid in options.validators" ng-show="formScope[options.key].$dirty &&formScope[options.key].$error[valid.validator.split('=')[0]]">
+      {{valid.errorMessage }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="form-group">
+  <label for="{{id}}"  class="{{options.labelWidth || 'col-sm-2'}} control-label">
+    <span class="text-danger">{{options.required ? '*' : ''}}</span>
+    <span ng-bind-html="options.label || 'Checkbox'"></span>
+  </label>
+  <div class="{{options.formItemWidth || 'col-sm-4'}}">
+    <div class="checkbox checkbox-inline"
+       ng-repeat="(key, enabled) in options.options">
+      <label for="">
+        <input type="checkbox"
+               ng-model="result[options.key][key]"
+               formly-dynamic-name="options.key"
+               ng-required="field.field_required"
+               ng-disabled="field.field_disabled"/>
+        <span>{{key}}</span>
+      </label>
+    </div>
+    <p id="{{id}}_description" class="help-block" ng-if="option.description">{{option.description}}</p>
+  </div>
+</div>

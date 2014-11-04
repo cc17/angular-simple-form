@@ -1,0 +1,8 @@
+<div class="form-group simple-form-submit">
+  <label for="{{id}}" class="{{options.labelWidth || 'col-sm-2'}} control-label">
+    <span ng-bind-html="options.label"></span>
+  </label>
+  <div class="{{options.formItemWidth || 'col-sm-4'}}">
+    <button type="submit" ng-disabled="formScope.$invalid" ng-click="onSubmit(result)" class="btn btn-primary">{{options.key || 'submit'}}</button>
+  </div>
+</div>

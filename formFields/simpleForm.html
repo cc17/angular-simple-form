@@ -1,0 +1,12 @@
+<form class="{{options.formStyle || 'form-horizontal'}}" id="{{options.uniqueFormId}}" role="form" novalidate>
+  <div class="simple-form-field" formly-field ng-repeat="field in fields"
+                on-submit-handle="onSubmit"
+                options="field"
+                form-scope = "formOnParentScope"
+                form-result="result"
+                form-id="options.uniqueFormId"
+                ng-if="!field.hide"
+                index="$index">
+  </div>
+  <div ng-transclude></div>
+</form>

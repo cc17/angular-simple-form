@@ -1,0 +1,21 @@
+{
+  "name": "simpleForm",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "dengxiaoming1217@gmail.com"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/scripts/demo/vendor",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "angular-form"
+  ]
+}

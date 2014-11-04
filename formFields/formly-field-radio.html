@@ -1,0 +1,22 @@
+<div class="form-group" ng-class="{'has-error': options.formField.$invalid}">
+	<label for="{{id}}" class="{{options.labelWidth || 'col-sm-2'}} control-label">
+      <span class="text-danger">{{options.required ? '*' : ''}}</span>
+      <span ng-bind-html="options.label || 'radio'"></span>
+	</label>
+  <div class="{{options.formItemWidth || 'col-sm-4'}}">
+    <div class="radio radio-inline"
+       ng-repeat="(key, option) in options.options">
+      <label for="">
+        <input type="radio"
+               formly-dynamic-name="options.key"
+               formly-custom-validation="options.validators"
+               id="{{id + '_'+ $index}}"
+               ng-value="option.value"
+               ng-required="options.required"
+               ng-model="result[options.key]">
+        {{option.name}}
+      </label>
+     <p id="{{id}}_description" class="help-block" ng-if="option.description">{{option.description}}</p>
+    </div>
+  </div>
+</div>
