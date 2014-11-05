@@ -1,12 +1,11 @@
 {
   "name": "simple-form",
-  "main": "simple-form.js",
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cc17/angular-simple-form",
   "authors": [
-    "dengxiaoming1217@gmail.com"
+    "cc17 <dengxiaoming1217@gmail.com>"
   ],
   "license": "MIT",
-  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -14,9 +13,5 @@
     "app/scripts/demo/vendor",
     "test",
     "tests"
-  ],
-  "keywords": [
-    "angular-form"
-  ],
-  "homepage": "https://github.com/cc17/angular-simple-form"
+  ]
 }
