@@ -14,6 +14,24 @@
     });
   };
 
+
+  /**
+   *
+   * @type 定义一个hook，通过type查找dom元素
+   */
+  var fields = {
+    'textarea':'textarea',
+    'radio':'input',
+    'select':'select',
+    'number':'input',
+    'checkbox':'input',
+    'password':'input',
+    'hidden':'input',
+    'email':'input',
+    'text':'input',
+    'static':'static',
+    'submit':'input'
+  };
   /*
   * cache url
   * */
@@ -53,37 +71,36 @@
     }
   })();
 
-  /**
-   *
-   * @type 定义一个hook，通过type查找dom元素
-   */
-  var fields = {
-    'textarea':'textarea',
-    'radio':'input',
-    'select':'select',
-    'number':'input',
-    'checkbox':'input',
-    'password':'input',
-    'hidden':'input',
-    'email':'input',
-    'text':'input',
-    'static':'static',
-    'submit':'input'
-  };
-  /**
-   * 预定义模板路径
-   */
-  for(var key in fields){
-    formlyUrlCache.setTemplateUrl(key, 'formFields/formly-field-' + key + '.html');
-  }
+  
 
 
   angular.module('simpleFormModule',[])
-    .directive('simpleForm', function formlyForm() {
-      'use strict';
+    .provider('simpleForm',function(){
+      var bower_component_path;
+      this.setBowerComponentPath = function(path){
+        bower_component_path = path;
+      };
+      this.getBowerComponentPath = function(){
+        return bower_component_path || '/vendor';
+      };
+
+      this.$get = function(){
+        return this;
+      };
+    })
+    .directive('simpleForm', ['simpleForm',function formlyForm(simpleForm) {
+      var bower_component_path = simpleForm.getBowerComponentPath();
+      
+      /**
+       * 预定义模板路径
+       */
+      for(var key in fields){
+        formlyUrlCache.setTemplateUrl(key, bower_component_path + '/simple-form/formFields/formly-field-' + key + '.html');
+      }
+
       return {
         restrict: 'AE',
-        templateUrl: 'scripts/template/formFields/simpleForm.html',
+        templateUrl: bower_component_path + '/simple-form/formFields/simpleForm.html',
         replace: true,
         transclude: true,
         scope: {
@@ -104,11 +121,11 @@
         },
         controller: ['$scope','$element','$parse',function($scope, $element, $parse) {
 
-          $scope.options.uniqueFormId = $scope.options.uniqueFormId || '';
+          //$scope.options.uniqueFormId = $scope.options.uniqueFormId || '';
 
         }]
       };
-    })
+    }])
 
     .directive('formlyDynamicValue', function() {
       'use strict';
@@ -152,7 +169,7 @@
           formScope:'=',
           onSubmitHandle:'='
         },
-        link: function fieldLink($scope, $element,attrs) {
+        link: function fieldLink($scope, $element,attrs) { 
 
           var template = $scope.options.template || formlyUrlCache.getTemplate($scope.options.type);
           var type = $scope.options.type;
