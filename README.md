@@ -6,7 +6,8 @@
   * model to view 。表单配置项可单独提取作为一个独立模块，实现复用。比如两个表单中公共字段提取出来，重复利用
   * 可配置属性丰富。
   * validator 采用传入directive的形式，便于复用。directive校验失败时会自动展示errorMessage。这里需要注意：默认directive中校验名必须跟directive名字保持一致。如:a.js 中  
-  ```js
+  
+ ```js
      app.directive('checkUsername',function(){ 
           return {
               require:'ngModel',
