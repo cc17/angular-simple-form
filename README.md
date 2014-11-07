@@ -1,24 +1,30 @@
 #angular-simple-form
 
-> 通过配置form表单所需model，自动完成视图的渲染。支持常用表单类型，可进行双向绑定。每个表单元素可以传递多个validator及errormessage。validator必须一个directive的名字，通过此方式，可以复用。
+> angular-form开源demo，github上有好多。不过大都不太好用。我这个demo，可以通过配置form表单所需model，自动完成视图的渲染。支持常用表单类型，可进行双向绑定。每个表单元素可以传递多个validator及errormessage。validator必须一个directive的名字，通过此方式，可以复用。
+
+## 特性：
+  * model to view 。表单配置项可单独提取作为一个独立模块，实现复用。比如两个表单中公共字段提取出来，重复利用
+  * 可配置属性丰富。
+  * validator 采用传入directive的形式，便于复用。directive校验失败时会自动展示errorMessage。这里需要注意：默认directive中校验名必须跟directive名字保持一致。如:a.js 中  
+  ```js
+     app.directive('checkUsername',function(){ 
+          return {
+              require:'ngModel',
+              link:function(scope,elem,attrs,ctrl){
+                  ctrl.$parsers.unshift(function(value){
+                      //注意这里的valid name 跟directive命名一致，出错时会拿到这个校验信息的
+                      ctrl.$setValidity('checkUsername', !!value);
+                  });
+              }
+          };
+     })
+  ```
 
 ## model配置
 ```js
 //model配置
 
 $scope.formFields = [
-          {
-            key: 'teststatic',
-            type:"static",
-            value:'这里显示静态内容',
-            label: '文本框：'
-          },
-          {
-            type:"date",
-            label: '日期选择：',
-            startKey:'startTime',
-            endKey:'endTime2'
-          },
           {
             key: 'test',
             type:"text",
@@ -34,6 +40,18 @@ $scope.formFields = [
                 'errorMessage':'长度不少于5'
               }
             ]
+          },
+          {
+            key: 'teststatic',
+            type:"static",
+            value:'这里显示静态内容',
+            label: '文本框：'
+          },
+          {
+            type:"date",
+            label: '日期选择：',
+            startKey:'startTime',
+            endKey:'endTime2'
           },
           {
             key: 'custom',
@@ -144,3 +162,4 @@ $scope.formFields = [
 ```
 
 ##view视图最后会渲染成：
+![view](https://github.com/cc17/angular-simple-form/blob/master/12.png)
