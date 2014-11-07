@@ -1,6 +1,7 @@
 {
   "name": "simple-form",
   "version": "0.0.0",
+  "main":"./simple-form.js",
   "homepage": "https://github.com/cc17/angular-simple-form",
   "authors": [
     "cc17 <dengxiaoming1217@gmail.com>"
